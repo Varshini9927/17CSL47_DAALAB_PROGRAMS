@@ -1,0 +1,88 @@
+/* Program : 9 Find Minimum Cost Spanning Tree of a given connected undirected graph using 
+Prim's algorithm. */
+
+
+import java.util.Scanner;
+public class prims
+{
+public static void prims(int n,int a[][])
+{
+int i,j,k,u,v,min,sum,source;
+int t[][]=new int [10][2];
+int p[] = new int[10];
+int s[] = new int[10];
+int d[] = new int[10];
+min=999;
+source=0;
+for(i=0;i<n;i++)
+{
+for(j=0;j<n;j++)
+{
+if(a[i][j]!=0&&a[i][j]<min)
+{
+min=a[i][j];
+source=i;
+
+}
+}
+for(i=0;i<n;i++)
+{
+d[i]=a[source][i];
+s[i]=0;
+p[i]=source;
+}
+s[source]=1;
+k=0;
+sum=0;
+for(i=1;i<n;i++)
+{
+min=999;
+u=-1;
+for(j=0;j<n;j++)
+{
+if(s[j]==0)
+{
+if(d[j]<=min)
+{
+min=d[j];
+u=j;
+}
+}
+}
+t[k][0]=u;
+t[k][1]=p[u];
+k++;
+sum=sum+a[u][p[u]];
+s[u]=1;
+for(v=0;v<n;v++)
+{
+if(s[v]==0&&a[u][v]<=d[v])
+{
+d[v]=a[u][v];
+p[v]=u;
+}
+}
+}
+if(sum>=999)
+System.out.println("Spanning tree doesnot exists");
+else
+{
+System.out.println("Spanning tree");
+for(i=0;i<n-1;i++)
+System.out.println(t[i][0]+","+t[i][1]);
+System.out.println("Cost of spanning tree"+ sum);
+}
+}
+public static void main(String args[])
+{
+int a[][]=new int[10][10];
+Scanner scan = new Scanner(System.in);
+System.out.println("Enter number of nodes");
+int n=scan.nextInt();
+System.out.println("Enter cost adjacency matrix");
+for(int i=0;i<n;i++)
+for(int j=0;j<n;j++)
+a[i][j]=scan.nextInt();
+prims(n,a);
+}
+}

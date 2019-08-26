@@ -1,0 +1,67 @@
+/* Program : 5 Sort a given set of n integer elements using Merge Sort method and compute its time 
+complexity. Run the program for varied values of n> 5000, and record the time taken 
+to sort. Plot a graph of the time taken versus non graph sheet. The elements can be read 
+from a file or can be generated using the random number generator. Demonstrate using 
+Java how the divide-and-conquer method works along with its time complexity 
+analysis: worst case, average case and best case. */
+
+
+
+import java.util.Scanner;
+import java.util.Random;
+public class mergesort
+{
+static final int MAX = 20000;
+static int a[]=new int[MAX];
+public static void main(String args[])
+{
+Scanner scan = new Scanner(System.in);
+int n,i=0;
+System.out.println("Enter maximum array size");
+n = scan.nextInt();
+Random random = new Random();
+for(i=0;i<n;i++)
+a[i]=random.nextInt(500);
+System.out.println("Array elements");
+for(i=0;i<n;i++)
+System.out.print(a[i]+" ");
+System.out.println();
+long startTime = System.nanoTime();
+mergesortalgorithm(a,0,n-1);
+long stopTime = System.nanoTime();
+long elapsedTime = stopTime - startTime;
+System.out.println("Sorted array");
+for(i=0;i<n;i++)
+System.out.print(a[i]+" ");
+System.out.println("Time complexity in ms for n = "+ (double) elapsedTime/1000000);
+}
+public static void mergesortalgorithm(int a[],int low,int high)
+{
+int mid;
+if(low<high)
+{
+mid=(low+high)/2;
+mergesortalgorithm(a,low,mid);
+mergesortalgorithm(a,mid+1,high);
+merge(a,low,mid,high);
+}
+}
+public static void merge(int a[],int low,int mid,int high)
+{
+int i=low,j=mid+1,k=low;
+int b[]=new int[MAX];
+while((i<=mid)&&(j<=high))
+{
+if(a[i]<a[j])
+b[k++]=a[i++];
+else
+b[k++]=a[j++];
+}
+while(i<=mid)
+b[k++]=a[i++];
+while(j<=high)
+b[k++]=a[j++];
+for(i=low;i<=high;i++)
+a[i]=b[i];
+}
+}

@@ -1,0 +1,53 @@
+/* Program : 10(A) Write Java programs to 
+Implement All-Pairs Shortest Paths problem using Floyd's algorithm. */
+
+import java.util.*;
+public class floyds
+{
+static int a[][];
+static int n;
+final static int MAX=20;
+public static void main(String args[])
+{
+a=new int[MAX][MAX];
+readmatrix();
+floyds();
+printmatrix();
+}
+static void readmatrix()
+{
+Scanner scan = new Scanner(System.in);
+System.out.println("Enter number of vertices");
+n=scan.nextInt();
+System.out.println("Enter cost adjacency matrix");
+for(int i=0;i<n;i++)
+for(int j=0;j<n;j++)
+a[i][j]=scan.nextInt();
+scan.close();
+}
+static void floyds()
+{
+for(int k=0;k<n;k++)
+{
+for(int i=0;i<n;i++)
+for(int j=0;j<n;j++)
+if(a[i][j]>(a[i][k]+a[k][j]))
+{
+a[i][j]=a[i][k]+a[k][j];
+}
+}
+}
+static void printmatrix()
+{
+System.out.println("All pair shortest path matrix ");
+System.out.println("-----------------------------------");
+for(int i=0;i<n;i++)
+{
+for(int j=0;j<n;j++)
+{
+System.out.print(a[i][j]+" ");
+}
+System.out.println();
+}
+}
+}

@@ -1,0 +1,72 @@
+/* Program : 3(B) Write a Java program that implements a multi-thread application that has three 
+threads. First thread generates a random integer for every 1 second; second 
+thread computes the square of the number and prints; third thread will print the 
+value of cube of the number. */ 
+
+
+
+import java.util.Scanner;
+import java.util.Random;
+class SquareThread implements Runnable
+{
+int x;
+SquareThread(int x)
+{
+this.x=x;
+}
+public void run()
+{
+System.out.println("Thread name: SquareThread and square of x ="+x*x);
+}
+}
+class CubeThread implements Runnable
+{
+int x;
+CubeThread(int x)
+{
+this.x=x;
+}
+public void run()
+{
+System.out.println("Thread name: CubeThread and cube of x ="+x*x*x);
+}
+}
+class RandomThread implements Runnable
+{
+Random r;
+Thread t2,t3;
+public void run()
+{
+int num;
+r=new Random();
+try
+{
+Scanner scan=new Scanner(System.in);
+System.out.println("Enter the random numbers");
+int n=scan.nextInt();
+for(int i=0;i<n;i++)
+{
+num=r.nextInt(100);
+System.out.println("Main thread and generated number is"+num);
+t2=new Thread(new SquareThread(num));
+t2.start();
+t3=new Thread(new CubeThread(num));
+t3.start();
+Thread.sleep(1000);
+}
+}
+catch(Exception e)
+{
+System.out.println("Interrupted Exception");
+}
+}
+}
+public class mainthread
+{
+public static void main(String args[])
+{
+RandomThread rt=new RandomThread();
+Thread t1=new Thread(rt);
+t1.start();
+}
+}

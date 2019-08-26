@@ -1,0 +1,52 @@
+/* Program : 1(A) Create a java class called Student with the following details as variables within it.
+(1) USN
+(2) Name
+(3) Branch
+(4) Phone
+*/
+
+
+import java.util.*;
+class studentinformation
+{
+String usn,name,branch,phone;
+Scanner scan = new Scanner(System.in);
+void read()
+{
+System.out.println("Enter USN");
+usn=scan.next();
+System.out.println("Enter Name");
+name=scan.next();
+System.out.println("Enter Branch");
+branch=scan.next();
+System.out.println("Enter Phone number");
+phone=scan.next();
+}
+void display()
+{
+System.out.printf("%s%20s%20s%20s\n",usn,name,branch,phone);
+}
+}
+public class student
+{
+public static void main(String args[])
+{
+int i,n;
+Scanner s=new Scanner(System.in);
+System.out.println("Enter number of student details to be recorded");
+n=s.nextInt();
+studentinformation si[]=new studentinformation[n];
+for(i=0;i<n;i++)
+{
+System.out.printf("Enter %d student details\n",i+1);
+si[i]=new studentinformation();
+si[i].read();
+}
+for(i=0;i<n;i++)
+{
+System.out.println("Student details");
+System.out.println("USN\t\tNAME\t\t\tBRANCH\t\t\tPHONE");
+si[i].display();
+}
+}
+}
